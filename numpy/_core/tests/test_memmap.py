@@ -59,6 +59,7 @@ class TestMemmap:
         assert_array_equal(self.data, newfp)
         assert_equal(newfp.flags.writeable, False)
 
+    @pytest.mark.thread_unsafe  # pytest-run-parallel#14
     def test_open_with_filename(self, tmp_path):
         tmpname = tmp_path / 'mmap'
         fp = memmap(tmpname, dtype=self.dtype, mode='w+',
@@ -80,6 +81,7 @@ class TestMemmap:
         assert_equal(mode, fp.mode)
         del fp
 
+    @pytest.mark.thread_unsafe  # pytest-run-parallel#14
     def test_filename(self, tmp_path):
         tmpname = tmp_path / "mmap"
         fp = memmap(tmpname, dtype=self.dtype, mode='w+',
@@ -92,6 +94,7 @@ class TestMemmap:
         del b
         del fp
 
+    @pytest.mark.thread_unsafe  # pytest-run-parallel#14
     def test_path(self, tmp_path):
         tmpname = tmp_path / "mmap"
         fp = memmap(Path(tmpname), dtype=self.dtype, mode='w+',

@@ -1915,6 +1915,7 @@ class TestFromCTypes:
         assert_equal(pair_type, expected)
 
 
+@pytest.mark.thread_unsafe
 class TestUserDType:
     @pytest.mark.leaks_references(reason="dynamically creates custom dtype.")
     def test_custom_structured_dtype(self):
